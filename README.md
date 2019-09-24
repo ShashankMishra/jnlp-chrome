@@ -1,6 +1,6 @@
 # jnlp-chrome
 jnlp with chrome driver and chrome binary
 
-1. Jenkins :
+1. Jenkins (use pull directly from docker hub):
 
-use pull directly from docker hub - docker pull shankytcs/jnlp-chrome
+```shankytcs/jnlp-chrome```
