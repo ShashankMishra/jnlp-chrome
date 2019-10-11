@@ -1,3 +1,5 @@
+FROM sonarqube
+
 FROM cloudbees/jnlp-slave-with-java-build-tools
 
 USER root
