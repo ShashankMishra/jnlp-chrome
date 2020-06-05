@@ -22,17 +22,25 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
 ARG JMETER_VERSION="5.1.1"
 ENV JMETER_HOME /opt/apache-jmeter-${JMETER_VERSION}
 ENV	JMETER_BIN	${JMETER_HOME}/bin
+ENV	JMETER_EXT_LIB	${JMETER_HOME}/lib/ext
 ENV	JMETER_DOWNLOAD_URL  https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz
+ENV JMETER_PLUGIN_URL https://jmeter-plugins.org/get/
 
 # Install extra packages
 # See https://github.com/gliderlabs/docker-alpine/issues/136#issuecomment-272703023
-# Change TimeZone TODO: TZ still is not set!
-ARG TZ="Europe/Amsterdam"
+
 RUN mkdir -p /tmp/dependencies  \
 	&& curl -L --silent ${JMETER_DOWNLOAD_URL} >  /tmp/dependencies/apache-jmeter-${JMETER_VERSION}.tgz  \
 	&& mkdir -p /opt  \
 	&& tar -xzf /tmp/dependencies/apache-jmeter-${JMETER_VERSION}.tgz -C /opt  \
 	&& rm -rf /tmp/dependencies
+
+
+RUN mkdir -p /tmp/plugins  \
+	&& curl -L --silent ${JMETER_PLUGIN_URL} >  /tmp/plugins/apache-plugin-${JMETER_VERSION}.tgz  \
+	&& tar -xzf /tmp/plugins/apache-plugin-${JMETER_VERSION}.tgz -C ${JMETER_EXT_LIB}  \
+	&& rm -rf /tmp/plugins
+
 
 # TODO: plugins (later)
 # && unzip -oq "/tmp/dependencies/JMeterPlugins-*.zip" -d $JMETER_HOME
