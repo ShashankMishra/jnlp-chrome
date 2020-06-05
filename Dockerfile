@@ -37,8 +37,8 @@ RUN mkdir -p /tmp/dependencies  \
 
 
 RUN mkdir -p /tmp/plugins  \
-	&& curl -L --silent ${JMETER_PLUGIN_URL} >  /tmp/plugins/apache-plugin-${JMETER_VERSION}.tgz  \
-	&& tar -xzf /tmp/plugins/apache-plugin-${JMETER_VERSION}.tgz -C ${JMETER_EXT_LIB}  \
+	&& curl -L -k --silent ${JMETER_PLUGIN_URL} >  /tmp/plugins/apache-plugin-manager.jar  \
+	&& cp /tmp/plugins/apache-plugin-manager.jar $JMETER_EXT_LIB \
 	&& rm -rf /tmp/plugins
 
 
