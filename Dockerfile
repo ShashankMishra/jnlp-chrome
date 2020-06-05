@@ -17,11 +17,8 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
     apt-get -yqq update && \
     apt-get -yqq install google-chrome-stable && \
     rm -rf /var/lib/apt/lists/*
-    
-    
 
-RUN  curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
-
+# Install Jmeter
 ARG JMETER_VERSION="5.1.1"
 ENV JMETER_HOME /opt/apache-jmeter-${JMETER_VERSION}
 ENV	JMETER_BIN	${JMETER_HOME}/bin
@@ -50,9 +47,6 @@ RUN    apk update \
 # Set global PATH such that "jmeter" command is found
 ENV PATH $PATH:$JMETER_BIN
 
-# Entrypoint has same signature as "jmeter" command
-COPY entrypoint.sh /
-
-ENTRYPOINT ["/entrypoint.sh"]
+RUN  curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
 
 USER jenkins
