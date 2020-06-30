@@ -53,3 +53,4 @@ RUN mkdir -p /tmp/plugins  \
 ENV PATH $PATH:$JMETER_BIN
 
 RUN  curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+USER jenkins
